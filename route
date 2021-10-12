@@ -1,0 +1,39 @@
+import {
+    BrowserRouter as Router,
+    Link,
+    Route,
+    Switch
+} from "react-router-dom";
+import Display from "./display";
+import Login from "./login";
+import Register from "./register";
+
+export default function MyRouter() {
+    return (
+        <>
+            <Router>
+
+                <Link to='/display'><button>display</button></Link>
+                <Link to='/register'><button>register</button></Link>
+                <Link to='/'><button>login</button></Link>
+                <br />
+                <Switch>
+
+                    <Route path="/display">
+                        <Display></Display>
+                    </Route>
+                    <Route path="/register">
+                        <Register></Register>
+                    </Route>
+                    <Route path="/">
+                        <Login></Login>
+                    </Route>
+                </Switch>
+
+            </Router>
+        </>
+    )
+}
+
+
+
