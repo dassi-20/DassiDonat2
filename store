@@ -1,0 +1,43 @@
+import { createStore } from "redux";
+import produce from "immer";
+
+const initialState = {
+    currentUser:  null,
+    users: [
+        {
+            nameUser: "sari",
+            password:"1253",
+            city:"BB",
+            age: 20
+        },
+        {
+            nameUser: "miri",
+            password:"456",
+            city:"BB",
+            age: 30
+        }
+    ]
+}
+
+// action:{type:'SET_CURRENT_USER',payload:user}
+
+const reducer=produce((state,action)=>{
+    switch (action.type) {
+        case 'SET_CURRENT_USER':
+           state.currentUser=action.payload
+            break;
+             case 'CREATE_USER':
+           state.users.push(action.payload)
+           console.log("redux",state.users)
+            break;
+    
+        default:
+            break;
+    }
+
+},initialState)
+
+
+const store=createStore(reducer)
+window.store=store
+export default store
