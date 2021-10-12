@@ -1,0 +1,49 @@
+import React, { useRef } from "react";
+import { connect } from "react-redux";
+import { createUser } from './redux/actions';
+import { useHistory } from 'react-router-dom';
+
+function mapStateToProps(state) {
+    return {
+        currentUser: state.currentUser,
+        userList: state.users
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        createUser: (user) => { dispatch(createUser(user)) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(function Register(props) {
+
+    const nameRef = useRef(null);
+    const passwordRef = useRef(null);
+    const cityRef = useRef(null);
+    const ageRef = useRef(null);
+    const history = useHistory();
+    const { userList, currentUser, createUser } = props
+
+    function addUser() {
+        const newUser = {
+            nameUser: nameRef.current.value,
+            password: passwordRef.current.value,
+            city: cityRef.current.value,
+            age: ageRef.current.value
+        }
+        console.log(newUser)
+        createUser(newUser)
+        history.push('/login')
+    }
+
+    return (
+        <>
+            name:<input ref={nameRef}></input><br></br>
+            password:<input ref={passwordRef}></input><br></br>
+            city:<input ref={cityRef}></input><br></br>
+            age:<input ref={ageRef}></input><br></br>
+            <button onClick={addUser}>add me</button>
+        </>
+    )
+})
