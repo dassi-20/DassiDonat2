@@ -1,0 +1,29 @@
+import React, { Component, useRef } from 'react';
+import { connect } from 'react-redux';
+
+
+function mapStateToProps(state){
+ return{
+     currentUser:state.currentUser,
+     usersList:state.users
+ }
+}
+
+// high order Component
+export default connect(mapStateToProps)( function Display(props) {
+
+   const {currentUser,usersList}=props
+
+
+    return (
+        <>
+            {
+                currentUser && 
+                <div>
+                <h2>name:{currentUser.nameUser}  </h2>
+                <h2>city:{currentUser.city}  </h2>
+                </div>
+            }
+        </>
+    )
+})
